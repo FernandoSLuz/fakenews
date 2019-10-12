@@ -20,7 +20,7 @@ def insert_user(data):
     usr = users(data.phone, "default - name", str(result.hexdigest()))
     db.session.add(usr)
     db.session.commit()
-    return find_user(data.phone)
+    return find_user(data)
 
 def select_all_users():
     data_users = users.query.all()
@@ -34,10 +34,13 @@ def select_all_users():
         usersData.insert(num, context)
     return(usersData)
 
-def find_user(query_phone):
-    user = users.query.filter_by(phone=query_phone).first()
-    if(user != None): return user
-    else: return None
+def find_user(query):
+    result = users.query.filter_by(phone=query.phone).first()
+    if(user != None): 
+        query.name = result.name
+        query.phone = result.phone
+        query.conversationid = result.conversationid
+    return query
 
 def update_user(userPhone, new_Name):
     upd = db.update(users).where(users.phone == userPhone).values(name=new_Name)
