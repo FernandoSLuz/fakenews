@@ -36,7 +36,7 @@ def select_all_users():
 
 def find_user(query):
     result = users.query.filter_by(phone=query.phone).first()
-    if(user != None): 
+    if(result != None): 
         query.name = result.name
         query.phone = result.phone
         query.conversationid = result.conversationid
