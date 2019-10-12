@@ -30,7 +30,7 @@ def sendWassengerMessage(phoneNumber, message):
     }
     payload = "{\"phone\":\""+phoneNumber+"\",\"priority\":\"urgent\",\"message\":\""+ message +"\"}"
     newPayloadJson = json.loads(newPayload)
-    print(newPayloadJson)
+    print(str(newPayloadJson))
     #print("formated payload = " + str(newPayload).replace(r"'", "\""))
     #print("old payload = " + payload)
     headers = {
