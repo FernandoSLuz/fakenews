@@ -18,10 +18,9 @@ for x in mycursor:
   print(x)
 
 result = hashlib.md5(str(datetime.now()).encode())
-usr = users("23123123123", "default - name", str(result.hexdigest()))
 
 sql = "INSERT INTO users (phone, name, conversationid) VALUES (%s, %s, %s)"
-val = (data.phone, "default - name", str(result.hexdigest()))
+val = ("123567", "default - name", str(result.hexdigest()))
 mycursor.execute(sql, val)
 
 mydb.commit()
