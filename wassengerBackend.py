@@ -49,7 +49,10 @@ def recievemessage():
         newUser.phone = recievedPhone
         newUser = database.find_user(newUser)
         if(newUser.conversationid == ""):
+            print("user created")
             newUser = database.insert_user(newUser)
+        else:
+            print("user found")
         print("phone = " + newUser.phone)
         print("conversationId = " + newUser.conversationid)
         print("name = " + newUser.name)
