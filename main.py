@@ -15,7 +15,7 @@ import mysql.connector
 mydb = mysql.connector.connect(
   host="35.199.79.147",
   user="root",
-  passwd="Zho9AKzqoGwr"
+  passwd="Zho9AKzqoGwr",
   database="goethe"
 )
 
