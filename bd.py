@@ -14,17 +14,6 @@ mydb = mysql.connector.connect(
 mycursor = mydb.cursor()
 
 
-sql = "SELECT * FROM users WHERE phone ='"+ "123567" +"'"
-
-mycursor.execute(sql)
-
-myresult = mycursor.fetchall()
-
-for x in myresult:
-  print(x[1])
-
-
-
 db = SQLAlchemy()
 
 class users(db.Model):
@@ -48,12 +37,14 @@ def insert_user(data):
     #return find_user(data)
 
 def find_user(query):
-    result = users.query.filter_by(phone=query.phone).first()
-    if(result != None): 
+    sql = "SELECT * FROM users WHERE phone ='"+ query.phone +"'"
+    mycursor.execute(sql)
+    myresult = mycursor.fetchall()
+    for x in myresult:
         print("found")
-        query.name = result.name
-        query.phone = result.phone
-        query.conversationid = result.conversationid
+        query.name = x[2]
+        query.phone = x[1]
+        query.conversationid = x[3]
     return query
 
 def select_all_users():
