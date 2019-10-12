@@ -23,7 +23,7 @@ def sendWassengerMessage(phoneNumber, message):
     import requests as req
     print("phone = " + phoneNumber + " ----- message = " + message)
     url = "https://api.wassenger.com/v1/messages"
-    payload = "{\"phone\":\""+phoneNumber+"\",\"priority\":\"urgent\",\"message\":\""+message+"\"}"
+    payload = "{\"phone\":\""+phoneNumber+"\",\"priority\":\"urgent\",\"message\":\""+str(message)+"\"}"
     headers = {
         'content-type': "application/json",
         'token': "905bd94b9d3a26df733849887c838b9cc5ee1538b72fb1937edf027d5b7b71c71b2c54f1c894e4a2"
