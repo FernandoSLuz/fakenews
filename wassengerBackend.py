@@ -7,7 +7,7 @@ import dialogflowBackend as dfb
 import flask
 from flask import Blueprint
 from bd import db
-
+import bd as database
 blueprint = flask.Blueprint('wassengerBackend', __name__)
 
 
@@ -51,7 +51,7 @@ def recievemessage():
             print("what")
             newUser.phone = recievedPhone
             newUser.name = "Teste"
-            db.insert_user(newUser)
+            database.insert_user(newUser)
             print("what")
             #dialogCallBackMessage = dfb.checkNumberStatus(recievedPhone, recievedMessage)
             #sendWassengerMessage(recievedPhone, dialogCallBackMessage)
