@@ -53,9 +53,11 @@ def recievemessage():
             newUser = database.insert_user(newUser)
         else:
             print("user found")
-        print("phone = " + newUser.phone)
-        print("conversationId = " + newUser.conversationid)
-        print("name = " + newUser.name)
+        test = database.select_all_users()
+        print(test)
+        #print("phone = " + newUser.phone)
+        #print("conversationId = " + newUser.conversationid)
+        #print("name = " + newUser.name)
         #dialogCallBackMessage = dfb.checkNumberStatus(recievedPhone, recievedMessage)
         #sendWassengerMessage(recievedPhone, dialogCallBackMessage)
         #test####
