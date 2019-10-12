@@ -10,6 +10,16 @@ from dialogflowBackend import blueprint as dialogflowBackend_blueprint
 
 import bd
 
+import mysql.connector
+
+mydb = mysql.connector.connect(
+  host="35.199.79.147",
+  user="root",
+  passwd="Zho9AKzqoGwr"
+)
+
+print(mydb)
+
 app = flask.Flask(__name__)
 
 app.secret_key = 'secret'

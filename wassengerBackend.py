@@ -17,9 +17,6 @@ class user():
 
 actualUser = user()
 
-
-
-
 def sendWassengerMessage(phoneNumber, message):
     import requests as req
     url = "https://api.wassenger.com/v1/messages"
