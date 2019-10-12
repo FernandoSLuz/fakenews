@@ -2,15 +2,17 @@ import sys
 import os
 import time
 import json
-import dialogflowBackend as dfb
+import dialogflowBackend as dialogScript
 
 import flask
 from flask import Blueprint
-import bd
+
+
 blueprint = flask.Blueprint('wassengerBackend', __name__)
 
 
 class user():
+    id = 0
     phone = ""
     name = ""
     conversationid = ""
@@ -33,6 +35,7 @@ def sendWassengerMessage(phoneNumber, message):
 
 @blueprint.route('/recieveWassengerMessage', methods=[ 'POST', 'GET' ])
 def recievemessage():
+    from bd
     from flask import request
     global actualUser
     newUser = user()
@@ -45,17 +48,17 @@ def recievemessage():
         recievedMessage = str(form['data']['body'])
         recievedPhone = str(form['data']['fromNumber'])
         newUser.phone = recievedPhone
-        newUser = bd.find_user(newUser,"users","phone",newUser.phone)
+        newUser = database.find_user(newUser,"users","phone",newUser.phone)
         if(newUser.conversationid == ""):
             print("user created")
-            newUser = bd.insert_user(newUser, "users")
+            newUser = database.insert_user(newUser, "users")
         else:
             print("user found")
-        test = bd.select_all_users("users")
+        #test = bd.select_all_users("users")
         #print("phone = " + newUser.phone)
         #print("conversationId = " + newUser.conversationid)
         #print("name = " + newUser.name)
-        #dialogCallBackMessage = dfb.checkNumberStatus(recievedPhone, recievedMessage)
+        dialogCallBackMessage = dialogScript.checkNumberStatus(newUser)
         #sendWassengerMessage(recievedPhone, dialogCallBackMessage)
         #test####
         #sendWassengerMessage(recievedPhone, recievedMessage)

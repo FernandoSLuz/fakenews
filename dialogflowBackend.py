@@ -14,12 +14,12 @@ from google.protobuf import struct_pb2
 blueprint = flask.Blueprint('dialogflowBackend', __name__)
 
 
-def checkNumberStatus(phoneRecieved, message):
+def checkNumberStatus(newUser):
     #AQUI CRIAREMOS UMA CONVERSA NOVA
     import requests as req
     url = "https://lighthouse-vms.appspot.com/users/check_status"
     payload = {
-        'phone' : phoneRecieved
+        'phone' : newUser.phone
     }
     res = req.post(url, data=payload)
     form = res.json()

@@ -1,4 +1,3 @@
-from flask_sqlalchemy import SQLAlchemy
 import hashlib
 from datetime import datetime
 
@@ -14,18 +13,6 @@ mydb = mysql.connector.connect(
 mycursor = mydb.cursor()
 
 
-db = SQLAlchemy()
-
-class users(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    phone = db.Column(db.String(100))
-    name = db.Column(db.String(100))
-    conversationid = db.Column(db.String(500))
-    def __init__(self, phone, name, conversationid):
-        self.phone = phone
-        self.name = name
-        self.conversationid = conversationid
-
 def insert_user(data, table):
     result = hashlib.md5(str(datetime.now()).encode())
     sql = "INSERT INTO " + table + " (phone, name, conversationid) VALUES (%s, %s, %s)"
@@ -38,6 +25,7 @@ def find_user(query, table, key, value):
     mycursor.execute(sql)
     myresult = mycursor.fetchall()
     for x in myresult:
+        query.id = x[0]
         query.name = x[2]
         query.phone = x[1]
         query.conversationid = x[3]
@@ -50,6 +38,7 @@ def select_all_users(table):
     index = 0
     for x in myresult:
         context = {
+            'id':int(x[0]),
             'phone':str(x[1]),
             'name':str(x[2]),
             'conversationid':str(x[3])
@@ -60,13 +49,13 @@ def select_all_users(table):
 
 
 
-def update_user(userPhone, new_Name):
-    upd = db.update(users).where(users.phone == userPhone).values(name=new_Name)
-    db.session.execute(upd)
-    db.session.commit()
-    print("USUÁRIO ATUALIZADO")
+#def update_user(userPhone, new_Name):
+    #upd = db.update(users).where(users.phone == userPhone).values(name=new_Name)
+    #db.session.execute(upd)
+    #db.session.commit()
+    #print("USUÁRIO ATUALIZADO")
 
-def reset_users():
-    upd = db.update(users).values(name="")
-    db.session.execute(upd)
-    db.session.commit()
+#def reset_users():
+    #upd = db.update(users).values(name="")
+    #db.session.execute(upd)
+    #db.session.commit()
