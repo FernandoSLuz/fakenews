@@ -16,7 +16,7 @@ class users(db.Model):
 
 def insert_user(data):
     print("test")
-    result = hashlib.md5(str(datetime.now()))
+    result = hashlib.md5(str(datetime.now()).encode())
     usr = users(data.phone, data.name, str(result.hexdigest()))
     db.session.add(usr)
     db.session.commit()
