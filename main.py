@@ -18,6 +18,11 @@ mydb = mysql.connector.connect(
   passwd="Zho9AKzqoGwr",
   database="goethe"
 )
+mydb.execute("SHOW DATABASES")
+
+for x in mycursor:
+  print(x)
+
 
 print(mydb)
 
