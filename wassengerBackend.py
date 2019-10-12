@@ -33,7 +33,7 @@ def sendWassengerMessage(phoneNumber, message):
         'content-type': "application/json",
         'token': "905bd94b9d3a26df733849887c838b9cc5ee1538b72fb1937edf027d5b7b71c71b2c54f1c894e4a2"
         }
-    print(payload)
+    print(payload.replace(r"'", r"\""))
     res = req.request("POST", url, data=payload, headers=headers)
     res.json() if res.status_code == 200 else []
     print(res.content)
