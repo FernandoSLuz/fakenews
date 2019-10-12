@@ -21,6 +21,7 @@ actualUser = user()
 
 def sendWassengerMessage(phoneNumber, message):
     import requests as req
+    print("phone = " + phoneNumber + " ----- message = " + message)
     url = "https://api.wassenger.com/v1/messages"
     payload = "{\"phone\":\""+phoneNumber+"\",\"priority\":\"urgent\",\"message\":\""+message+"\"}"
     headers = {
