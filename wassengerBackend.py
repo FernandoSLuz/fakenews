@@ -41,23 +41,23 @@ def recievemessage():
     res = (json.dumps(form, indent=3))
     recievedMessage = ""
     recievedPhone = ""
-    #try:
-    #except:
-    #    return "not found..."
-    if(str(form['data']['chat']['contact']['type']) == 'user'):
-        #print(form)
-        recievedMessage = str(form['data']['body'])
-        recievedPhone = str(form['data']['fromNumber'])
-        print(recievedMessage)
-        print(recievedPhone)
-        newUser.phone = recievedPhone
-        newUser.name = "Teste"
-        database.insert_user(newUser)
-        print("Teste")
-        #dialogCallBackMessage = dfb.checkNumberStatus(recievedPhone, recievedMessage)
-        #sendWassengerMessage(recievedPhone, dialogCallBackMessage)
-        #test####
-        sendWassengerMessage(recievedPhone, recievedMessage)
-        return "200"
-    else:
-        return("---------------> message is not from user. Type = " + str(form['data']['chat']['contact']['type']))
+    try:
+        if(str(form['data']['chat']['contact']['type']) == 'user'):
+            #print(form)
+            recievedMessage = str(form['data']['body'])
+            recievedPhone = str(form['data']['fromNumber'])
+            print(recievedMessage)
+            print(recievedPhone)
+            newUser.phone = recievedPhone
+            newUser.name = "Teste"
+            database.insert_user(newUser)
+            print("Teste")
+            #dialogCallBackMessage = dfb.checkNumberStatus(recievedPhone, recievedMessage)
+            #sendWassengerMessage(recievedPhone, dialogCallBackMessage)
+            #test####
+            sendWassengerMessage(recievedPhone, recievedMessage)
+            return "200"
+        else:
+            return("---------------> message is not from user. Type = " + str(form['data']['chat']['contact']['type']))
+    except:
+        return "not found..."
