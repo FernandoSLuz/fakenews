@@ -45,13 +45,13 @@ def recievemessage():
         recievedMessage = str(form['data']['body'])
         recievedPhone = str(form['data']['fromNumber'])
         newUser.phone = recievedPhone
-        newUser = bd.find_user(newUser)
+        newUser = bd.find_user(newUser,"users","phone",newUser.phone)
         if(newUser.conversationid == ""):
             print("user created")
-            newUser = bd.insert_user(newUser)
+            newUser = bd.insert_user(newUser, "users")
         else:
             print("user found")
-        test = bd.select_all_users()
+        test = bd.select_all_users("users")
         print(test)
         #print("phone = " + newUser.phone)
         #print("conversationId = " + newUser.conversationid)

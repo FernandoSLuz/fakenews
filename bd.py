@@ -26,9 +26,9 @@ class users(db.Model):
         self.name = name
         self.conversationid = conversationid
 
-def insert_user(data):
+def insert_user(data, table):
     result = hashlib.md5(str(datetime.now()).encode())
-    sql = "INSERT INTO users (phone, name, conversationid) VALUES (%s, %s, %s)"
+    sql = "INSERT INTO " + table + " (phone, name, conversationid) VALUES (%s, %s, %s)"
     val = (data.phone, "default - name", str(result.hexdigest()))
     mycursor.execute(sql, val)
     mydb.commit()
@@ -36,8 +36,8 @@ def insert_user(data):
 
     #return find_user(data)
 
-def find_user(query):
-    sql = "SELECT * FROM users WHERE phone ='"+ query.phone +"'"
+def find_user(query, table, key, value):
+    sql = "SELECT * FROM " + table + " WHERE " + key + " ='"+ value +"'"
     mycursor.execute(sql)
     myresult = mycursor.fetchall()
     for x in myresult:
@@ -47,8 +47,8 @@ def find_user(query):
         query.conversationid = x[3]
     return query
 
-def select_all_users():
-    mycursor.execute("SELECT * FROM customers")
+def select_all_users(table):
+    mycursor.execute("SELECT * FROM " + table)
     myresult = mycursor.fetchall()
     usersData = []
     index = 0
