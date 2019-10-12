@@ -23,13 +23,7 @@ def sendWassengerMessage(phoneNumber, message):
     import requests as req
     print("phone = " + phoneNumber + " ----- message = " + message)
     url = "https://api.wassenger.com/v1/messages"
-    newPayload = {
-        'phone': phoneNumber,
-        'priority': 'urgent',
-        'message': 'teste'
-    }
-    newPayloadJson = json.loads(str(newPayload).replace(r"'", "\""))
-    print(str(newPayloadJson))
+
     #print("formated payload = " + str(newPayload).replace(r"'", "\""))
 
 
@@ -41,7 +35,7 @@ def sendWassengerMessage(phoneNumber, message):
         'token': "905bd94b9d3a26df733849887c838b9cc5ee1538b72fb1937edf027d5b7b71c71b2c54f1c894e4a2"
         }
 
-    res = req.request("POST", url, data=newPayloadJson, headers=headers)
+    res = req.request("POST", url, data=payload, headers=headers)
     res.json() if res.status_code == 200 else []
     print(res.content)
     return res.status_code
