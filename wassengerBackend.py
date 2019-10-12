@@ -52,7 +52,8 @@ def recievemessage():
         existingUser = database.find_user(recievedPhone)
         if(existingUser == None):
             existingUser = database.insert_user(newUser)
-        print(existingUser.name)
+        if(existingUser == None): 
+            print("NON EXISTE")
         
         #dialogCallBackMessage = dfb.checkNumberStatus(recievedPhone, recievedMessage)
         #sendWassengerMessage(recievedPhone, dialogCallBackMessage)
