@@ -52,7 +52,7 @@ def recievemessage():
         existingUser = database.find_user(recievedPhone)
         if(existingUser == None):
             existingUser = database.insert_user(newUser)
-        print(existingUser.conversationid)
+        print(existingUser.name)
         
         #dialogCallBackMessage = dfb.checkNumberStatus(recievedPhone, recievedMessage)
         #sendWassengerMessage(recievedPhone, dialogCallBackMessage)
