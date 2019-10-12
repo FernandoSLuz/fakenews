@@ -14,18 +14,15 @@ mydb = mysql.connector.connect(
 mycursor = mydb.cursor()
 mycursor.execute("SHOW DATABASES")
 
-for x in mycursor:
+
+sql = "SELECT * FROM users WHERE phone ='"+ "123567" +"'"
+
+mycursor.execute(sql)
+
+myresult = mycursor.fetchall()
+
+for x in myresult:
   print(x)
-
-result = hashlib.md5(str(datetime.now()).encode())
-
-sql = "INSERT INTO users (phone, name, conversationid) VALUES (%s, %s, %s)"
-val = ("123567", "default - name", str(result.hexdigest()))
-mycursor.execute(sql, val)
-
-mydb.commit()
-
-print(mycursor.rowcount, "record inserted.")
 
 
 
@@ -42,14 +39,14 @@ class users(db.Model):
         self.conversationid = conversationid
 
 def insert_user(data):
-    print("test")
     result = hashlib.md5(str(datetime.now()).encode())
-    usr = users(data.phone, "default - name", str(result.hexdigest()))
-    db.session.add(usr)
+    sql = "INSERT INTO users (phone, name, conversationid) VALUES (%s, %s, %s)"
+    val = (data.phone, "default - name", str(result.hexdigest()))
+    mycursor.execute(sql, val)
+    mydb.commit()
+    print(mycursor.rowcount, "record inserted.")
 
-    db.session.commit()
-    
-    return find_user(data)
+    #return find_user(data)
 
 def find_user(query):
     result = users.query.filter_by(phone=query.phone).first()
