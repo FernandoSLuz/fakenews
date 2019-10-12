@@ -25,7 +25,7 @@ def insert_user(data):
     return find_user(data)
 
 def find_user(query):
-    result = users.query.filter_by(phone="+5511994995537").first()
+    result = users.query.filter_by(phone=query.phone).first()
     if(result != None): 
         print("found")
         query.name = result.name
