@@ -30,7 +30,7 @@ def sendWassengerMessage(phoneNumber, message):
         }
     res = req.request("POST", url, data=payload, headers=headers)
     res.json() if res.status_code == 200 else []
-    print(res.status_code)
+    print(res.content)
     return res.status_code
     #print(res.json())
 
