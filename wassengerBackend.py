@@ -14,6 +14,7 @@ blueprint = flask.Blueprint('wassengerBackend', __name__)
 class user():
     phone = ""
     name = ""
+    conversationid = ""
 
 actualUser = user()
 
@@ -48,13 +49,15 @@ def recievemessage():
         print(recievedMessage)
         print(recievedPhone)
         newUser.phone = recievedPhone
-        newUser.name = "Teste"
-        database.insert_user(newUser)
-        print("Teste")
+        existingUser = database.find_user(recievedPhone)
+        if(existingUser == None):
+            existingUser = database.insert_user(newUser)
+        print(existingUser.conversationid)
+        
         #dialogCallBackMessage = dfb.checkNumberStatus(recievedPhone, recievedMessage)
         #sendWassengerMessage(recievedPhone, dialogCallBackMessage)
         #test####
-        sendWassengerMessage(recievedPhone, recievedMessage)
+        #sendWassengerMessage(recievedPhone, recievedMessage)
         return "200"
     else:
         return("---------------> message is not from user. Type = " + str(form['data']['chat']['contact']['type']))

@@ -1,4 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
+import hashlib
+from datetime import datetime
 
 db = SQLAlchemy()
 
@@ -6,15 +8,19 @@ class users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     phone = db.Column(db.String(100))
     name = db.Column(db.String(100))
-    def __init__(self, phone, name):
+    conversationid = db.Column(db.String(100))
+    def __init__(self, phone, name, conversationid):
         self.phone = phone
         self.name = name
+        self.conversationid = conversationid
 
 def insert_user(data):
     print("test")
-    usr = users(data.phone, data.name)
+    result = hashlib.md5(str(datetime.now()))
+    usr = users(data.phone, data.name, str(result.hexdigest()))
     db.session.add(usr)
     db.session.commit()
+    return find_user(data.phone)
 
 def select_all_users():
     data_users = users.query.all()
@@ -23,6 +29,7 @@ def select_all_users():
         context = {
             'phone':str(item.phone),
             'name':str(item.name)
+            'conversationid':str(item.conversationid)
         }
         usersData.insert(num, context)
     return(usersData)
