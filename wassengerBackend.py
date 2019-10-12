@@ -57,7 +57,8 @@ def recievemessage():
             #test####
             sendWassengerMessage(recievedPhone, recievedMessage)
             return "200"
-        else:
+        else, e:
+            print(e)
             return("---------------> message is not from user. Type = " + str(form['data']['chat']['contact']['type']))
     except:
         return "not found..."
