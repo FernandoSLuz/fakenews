@@ -28,7 +28,7 @@ def select_all_users():
     for num, item in enumerate(data_users, start=0):
         context = {
             'phone':str(item.phone),
-            'name':str(item.name)
+            'name':str(item.name),
             'conversationid':str(item.conversationid)
         }
         usersData.insert(num, context)
