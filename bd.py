@@ -2,6 +2,20 @@ from flask_sqlalchemy import SQLAlchemy
 import hashlib
 from datetime import datetime
 
+import mysql.connector
+
+mydb = mysql.connector.connect(
+  host="35.199.79.147",
+  user="root",
+  passwd="Zho9AKzqoGwr",
+  database="goethe"
+)
+
+mycursor = mydb.cursor()
+mycursor.execute("SHOW DATABASES")
+
+for x in mycursor:
+  print(x)
 
 
 db = SQLAlchemy()
