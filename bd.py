@@ -8,7 +8,7 @@ class users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     phone = db.Column(db.String(100))
     name = db.Column(db.String(100))
-    conversationid = db.Column(db.String(100))
+    conversationid = db.Column(db.String(500))
     def __init__(self, phone, name, conversationid):
         self.phone = phone
         self.name = name
