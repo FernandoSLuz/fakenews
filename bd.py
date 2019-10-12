@@ -23,9 +23,9 @@ def insert_user(data):
     return find_user(data)
 
 def find_user(query):
-    print("DATABASE PHONE = " + query.phone)
     result = users.query.filter_by(phone=query.phone).first()
     if(result != None): 
+        print("found")
         query.name = result.name
         query.phone = result.phone
         query.conversationid = result.conversationid
