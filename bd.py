@@ -12,7 +12,6 @@ mydb = mysql.connector.connect(
 )
 
 mycursor = mydb.cursor()
-mycursor.execute("SHOW DATABASES")
 
 
 sql = "SELECT * FROM users WHERE phone ='"+ "123567" +"'"
