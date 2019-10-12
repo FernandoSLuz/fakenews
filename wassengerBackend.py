@@ -52,7 +52,6 @@ def recievemessage():
         else:
             print("user found")
         test = bd.select_all_users("users")
-        print(test)
         #print("phone = " + newUser.phone)
         #print("conversationId = " + newUser.conversationid)
         #print("name = " + newUser.name)
