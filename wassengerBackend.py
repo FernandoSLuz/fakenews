@@ -24,9 +24,9 @@ def sendWassengerMessage(phoneNumber, message):
     print("phone = " + phoneNumber + " ----- message = " + message)
     url = "https://api.wassenger.com/v1/messages"
     payload = {
-        'phone': phoneNumber,
-        'priority': 'urgent',
-        'message': 'teste'
+        "phone": phoneNumber,
+        "priority": "urgent",
+        "message": "teste"
     }
     #payload = "{\"phone\":\""+phoneNumber+"\",\"priority\":\"urgent\",\"message\":\""+ message +"\"}"
     headers = {
