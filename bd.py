@@ -32,16 +32,12 @@ def insert_user(data, table):
     val = (data.phone, "default - name", str(result.hexdigest()))
     mycursor.execute(sql, val)
     mydb.commit()
-    print(mycursor.rowcount, "record inserted.")
-
-    #return find_user(data)
 
 def find_user(query, table, key, value):
     sql = "SELECT * FROM " + table + " WHERE " + key + " ='"+ value +"'"
     mycursor.execute(sql)
     myresult = mycursor.fetchall()
     for x in myresult:
-        print("found")
         query.name = x[2]
         query.phone = x[1]
         query.conversationid = x[3]
@@ -53,7 +49,6 @@ def select_all_users(table):
     usersData = []
     index = 0
     for x in myresult:
-        print(x)
         context = {
             'phone':str(x[1]),
             'name':str(x[2]),
