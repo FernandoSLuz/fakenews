@@ -21,7 +21,7 @@ mycursor.execute(sql)
 myresult = mycursor.fetchall()
 
 for x in myresult:
-  print(x)
+  print(myresult[x][1])
 
 
 
