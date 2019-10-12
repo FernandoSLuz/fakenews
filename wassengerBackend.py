@@ -26,7 +26,7 @@ def sendWassengerMessage(phoneNumber, message):
     payload = {
         'phone': phoneNumber,
         'priority': 'urgent',
-        'message': 'olá\\n olá'
+        'message': 'teste'
     }
     #payload = "{\"phone\":\""+phoneNumber+"\",\"priority\":\"urgent\",\"message\":\""+ message +"\"}"
     headers = {
