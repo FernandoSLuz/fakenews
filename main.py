@@ -20,6 +20,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.register_blueprint(wassengerBackend_blueprint)
 app.register_blueprint(dialogflowBackend_blueprint)
 
+bd.db = bd.SQLAlchemy(app)
+
 @app.route('/')
 def index():
     context = {
