@@ -19,7 +19,7 @@ def insert_user(data):
     result = hashlib.md5(str(datetime.now()).encode())
     usr = users(data.phone, "default - name", str(result.hexdigest()))
     db.session.add(usr)
-    db.session.execute()
+
     db.session.commit()
     
     return find_user(data)
