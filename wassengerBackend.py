@@ -29,7 +29,7 @@ def sendWassengerMessage(phoneNumber, message):
         'message': 'teste'
     }
     payload = "{\"phone\":\""+phoneNumber+"\",\"priority\":\"urgent\",\"message\":\""+ message +"\"}"
-    newPayloadJson = json.loads(str(newPayload))
+    newPayloadJson = json.loads(payload)
     print(str(newPayloadJson))
     #print("formated payload = " + str(newPayload).replace(r"'", "\""))
     #print("old payload = " + payload)
