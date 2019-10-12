@@ -48,15 +48,19 @@ def find_user(query):
     return query
 
 def select_all_users():
-    data_users = users.query.all()
+    mycursor.execute("SELECT * FROM customers")
+    myresult = mycursor.fetchall()
     usersData = []
-    for num, item in enumerate(data_users, start=0):
+    index = 0
+    for x in myresult:
+        print(x)
         context = {
-            'phone':str(item.phone),
-            'name':str(item.name),
-            'conversationid':str(item.conversationid)
+            'phone':str(x[1]),
+            'name':str(x[2]),
+            'conversationid':str(x[3])
         }
-        usersData.insert(num, context)
+        usersData.insert(index, context)
+        index = index + 1
     return(usersData)
 
 
