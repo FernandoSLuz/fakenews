@@ -6,8 +6,7 @@ import dialogflowBackend as dfb
 
 import flask
 from flask import Blueprint
-from bd import db
-import bd as database
+import bd
 blueprint = flask.Blueprint('wassengerBackend', __name__)
 
 
@@ -47,13 +46,13 @@ def recievemessage():
         recievedMessage = str(form['data']['body'])
         recievedPhone = str(form['data']['fromNumber'])
         newUser.phone = recievedPhone
-        newUser = database.find_user(newUser)
+        newUser = bd.find_user(newUser)
         if(newUser.conversationid == ""):
             print("user created")
-            newUser = database.insert_user(newUser)
+            newUser = bd.insert_user(newUser)
         else:
             print("user found")
-        test = database.select_all_users()
+        test = bd.select_all_users()
         print(test)
         #print("phone = " + newUser.phone)
         #print("conversationId = " + newUser.conversationid)
