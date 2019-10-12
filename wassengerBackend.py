@@ -48,6 +48,7 @@ def recievemessage():
             recievedPhone = str(form['data']['fromNumber'])
             print(recievedMessage)
             print(recievedPhone)
+            print("what")
             newUser.phone = recievedPhone
             newUser.name = "Teste"
             db.insert_user(newUser)
