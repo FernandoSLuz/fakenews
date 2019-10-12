@@ -5,8 +5,6 @@ import json
 import dialogflowBackend as dfb
 
 import flask
-
-
 from flask import Blueprint
 from bd import db
 
@@ -53,7 +51,7 @@ def recievemessage():
             newUser.phone = recievedPhone
             newUser.name = "Teste"
             db.insert_user(newUser)
-            
+            print("what")
             #dialogCallBackMessage = dfb.checkNumberStatus(recievedPhone, recievedMessage)
             #sendWassengerMessage(recievedPhone, dialogCallBackMessage)
             #test####
