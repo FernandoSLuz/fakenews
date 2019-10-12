@@ -17,7 +17,7 @@ app.secret_key = 'secret'
 app.register_blueprint(wassengerBackend_blueprint)
 app.register_blueprint(dialogflowBackend_blueprint)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Zho9AKzqoGwr@35.199.79.147/goethe'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:Zho9AKzqoGwr@35.199.79.147/goethe'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 bd.db = bd.SQLAlchemy(app)
