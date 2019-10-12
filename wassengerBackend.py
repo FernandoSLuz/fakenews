@@ -46,12 +46,13 @@ def recievemessage():
         #print(form)
         recievedMessage = str(form['data']['body'])
         recievedPhone = str(form['data']['fromNumber'])
-        print(recievedMessage)
-        print(recievedPhone)
         newUser.phone = recievedPhone
         newUser = database.find_user(newUser)
         if(newUser.conversationid == ""):
             newUser = database.insert_user(newUser)
+        print("phone = " + newUser.phone)
+        print("conversationId = " + newUser.conversationid)
+        print("name = " + newUser.name)
         #dialogCallBackMessage = dfb.checkNumberStatus(recievedPhone, recievedMessage)
         #sendWassengerMessage(recievedPhone, dialogCallBackMessage)
         #test####
