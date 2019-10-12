@@ -18,15 +18,7 @@ class user():
 actualUser = user()
 
 
-import mysql.connector
 
-mydb = mysql.connector.connect(
-  host="35.199.79.147",
-  user="root",
-  passwd="Zho9AKzqoGwr"
-)
-
-print(mydb)
 
 def sendWassengerMessage(phoneNumber, message):
     import requests as req

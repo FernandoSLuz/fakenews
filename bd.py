@@ -2,15 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 import hashlib
 from datetime import datetime
 
-import mysql.connector
 
-mydb = mysql.connector.connect(
-  host="35.199.79.147",
-  user="root",
-  passwd="Zho9AKzqoGwr"
-)
-
-print(mydb)
 
 db = SQLAlchemy()
 
