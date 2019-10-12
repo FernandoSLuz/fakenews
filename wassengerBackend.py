@@ -35,7 +35,7 @@ def sendWassengerMessage(phoneNumber, message):
 
 @blueprint.route('/recieveWassengerMessage', methods=[ 'POST', 'GET' ])
 def recievemessage():
-    from bd
+    import bd
     from flask import request
     global actualUser
     newUser = user()
@@ -46,20 +46,19 @@ def recievemessage():
     if(str(form['data']['chat']['contact']['type']) == 'user'):
         #print(form)
         recievedMessage = str(form['data']['body'])
-        recievedPhone = str(form['data']['fromNumber'])
-        newUser.phone = recievedPhone
-        newUser = database.find_user(newUser,"users","phone",newUser.phone)
+        newUser.phone = str(form['data']['fromNumber'])
+        newUser = bd.find_user(newUser,"users","phone",newUser.phone)
         if(newUser.conversationid == ""):
             print("user created")
-            newUser = database.insert_user(newUser, "users")
+            newUser = bd.insert_user(newUser, "users", "phone", newUser.phone)
         else:
             print("user found")
         #test = bd.select_all_users("users")
         #print("phone = " + newUser.phone)
         #print("conversationId = " + newUser.conversationid)
         #print("name = " + newUser.name)
-        dialogCallBackMessage = dialogScript.checkNumberStatus(newUser)
-        #sendWassengerMessage(recievedPhone, dialogCallBackMessage)
+        dialogCallBackMessage = dialogScript.checkNumberStatus(newUser, recievedMessage)
+        sendWassengerMessage(newUser.phone, dialogCallBackMessage)
         #test####
         #sendWassengerMessage(recievedPhone, recievedMessage)
         return "200"

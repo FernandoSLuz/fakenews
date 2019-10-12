@@ -13,23 +13,25 @@ mydb = mysql.connector.connect(
 mycursor = mydb.cursor()
 
 
-def insert_user(data, table):
+def insert_user(data, table, key, value):
     result = hashlib.md5(str(datetime.now()).encode())
     sql = "INSERT INTO " + table + " (phone, name, conversationid) VALUES (%s, %s, %s)"
     val = (data.phone, "default - name", str(result.hexdigest()))
     mycursor.execute(sql, val)
     mydb.commit()
+    data = find_user(data, table, key, value)
+    return data
 
-def find_user(query, table, key, value):
+def find_user(data, table, key, value):
     sql = "SELECT * FROM " + table + " WHERE " + key + " ='"+ value +"'"
     mycursor.execute(sql)
     myresult = mycursor.fetchall()
     for x in myresult:
-        query.id = x[0]
-        query.name = x[2]
-        query.phone = x[1]
-        query.conversationid = x[3]
-    return query
+        data.id = x[0]
+        data.name = x[2]
+        data.phone = x[1]
+        data.conversationid = x[3]
+    return data
 
 def select_all_users(table):
     mycursor.execute("SELECT * FROM " + table)
