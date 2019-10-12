@@ -10,11 +10,6 @@ from dialogflowBackend import blueprint as dialogflowBackend_blueprint
 
 import bd
 
-
-
-
-print(mydb)
-
 app = flask.Flask(__name__)
 
 app.secret_key = 'secret'
