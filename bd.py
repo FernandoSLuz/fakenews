@@ -68,7 +68,6 @@ def find_news(data, table, key, value):
         data.id = x[0]
         data.url = x[1]
         data.userid = x[2]
-        data.newsid = x[3]
     return data
 
 def find_news_by_id(data, table, key, value):
