@@ -65,6 +65,7 @@ def dialogwebhook():
         content = {
             'message': message
         }
+        print("MESSAGE - " + message)
         return content
     return "não achei o link, malz ae"
     
