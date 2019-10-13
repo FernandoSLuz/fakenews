@@ -37,10 +37,13 @@ def dialogwebhook():
     form = request.get_json(silent=True, force=True)
     res = (json.dumps(form, indent=3))
     actualUser = user()
-    actualUser.conversationId = str(form['session']).replace("projects/lighthouse-vms/agent/sessions/","")
-    actualUser = bd.find_user(actualUser, "users", "conversationid", actualUser.conversationid)
-    print("big" + str(form['session']))
+    actualUser.conversationId = str(form['session'])
+
+    print("big = " + actualUser.conversationId )
+    actualUser.conversationId = (actualUser.conversationId).replace("projects/lighthouse-vms/agent/sessions/", "")
     print("small = " + actualUser.conversationid)
+
+    actualUser = bd.find_user(actualUser, "users", "conversationid", actualUser.conversationid)
     intentName = str(form['queryResult']['intent']['displayName'])
     if(intentName == "envio_do_link" or intentName == "link_direto"):
         actualNews = news()
