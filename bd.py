@@ -15,7 +15,7 @@ mycursor = mydb.cursor()
 
 def insert_user(data, table, key, value):
     result = hashlib.md5(str(datetime.now()).encode())
-    sql = "INSERT INTO " + table + " (phone, name, conversationid) VALUES (%s, %s, %s, %s)"
+    sql = "INSERT INTO " + table + " (phone, name, conversationid, newsid) VALUES (%s, %s, %s, %s)"
     val = (data.phone, "default - name", str(result.hexdigest()), 0)
     mycursor.execute(sql, val)
     mydb.commit()
