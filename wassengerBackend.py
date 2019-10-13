@@ -62,7 +62,7 @@ def dialogwebhook():
         unknown = "Pessoas que acreditam que a notícia é parcialmente verdadeira: " + str(votes[1])
         fake = "Pessoas que acreditam que a notícia é falsa: " + str(votes[2])
 
-        message = "Notícia: " + str(actualNews.url) + "\\n" + true + "\\n" + unknown + "\\n" + fake
+        message = "Notícia: " + str(actualNews.url) + "\\n\\n" + true + "\\n\\n" + unknown + "\\n\\n" + fake
         content = {
             'message': message
         }
