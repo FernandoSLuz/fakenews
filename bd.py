@@ -80,13 +80,13 @@ def find_votes(table, key, value):
         if(x[3] == 2): votes[2] = votes[2] + 1
     return votes
 
-def look_for_user_votes(data, table, key, value){
-    sql = "SELECT * FROM " + table
-    mycursor.execute(sql)
-    myresult = mycursor.fetchall()
-    for x in myresult:
-        
-}
+#def look_for_user_votes(data, table, key, value){
+#    sql = "SELECT * FROM " + table
+#    mycursor.execute(sql)
+#    myresult = mycursor.fetchall()
+    #for x in myresult:
+
+#}
 
 def update_user(table, keytoupdate, valuetoupdate, key, value):
     sql = "UPDATE " + table + " SET " + keytoupdate + " = '" + valuetoupdate + "' WHERE " + key + " = '" + value + "'"
