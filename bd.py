@@ -16,7 +16,7 @@ mycursor = mydb.cursor()
 def insert_user(data, table, key, value):
     result = hashlib.md5(str(datetime.now()).encode())
     sql = "INSERT INTO " + table + " (phone, name, conversationid, newsid) VALUES (%s, %s, %s, %s)"
-    val = (data.phone, "default - name", str(result.hexdigest()), 0)
+    val = (data.phone, "default - name", str(result.hexdigest()), -1)
     mycursor.execute(sql, val)
     mydb.commit()
     data = find_user(data, table, key, value)
@@ -80,13 +80,28 @@ def find_votes(table, key, value):
         if(x[3] == 2): votes[2] = votes[2] + 1
     return votes
 
-#def look_for_user_votes(data, table, key, value){
-#    sql = "SELECT * FROM " + table
-#    mycursor.execute(sql)
-#    myresult = mycursor.fetchall()
-    #for x in myresult:
+def check_if_user_already_voted(table, data):
+    sql = "SELECT * FROM " + table
+    mycursor.execute(sql)
+    myresult = mycursor.fetchall()
+    for x in myresult:
+        if(x[2] == data.id): return True
+    return False
 
-#}
+def look_for_user_votes(table, data, userdata):
+    sql = "SELECT * FROM " + table
+    mycursor.execute(sql)
+    myresult = mycursor.fetchall()
+    for x in myresult:
+        if(check_if_user_already_voted("votes", userdata) == False):
+            data.id = x[0]
+            data.url = x[1]
+            data.userid = x[2]
+            update_user("users", "newsid", data.id, "id", userdata.id)
+            break
+    return data
+
+
 
 def update_user(table, keytoupdate, valuetoupdate, key, value):
     sql = "UPDATE " + table + " SET " + keytoupdate + " = '" + valuetoupdate + "' WHERE " + key + " = '" + value + "'"

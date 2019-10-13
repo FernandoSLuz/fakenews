@@ -68,9 +68,20 @@ def dialogwebhook():
         print("MESSAGE - " + message)
         return content
     if(intentName == "escolheu_analisar"):
-        
+        #actualUser
+        actualNews = news()
+        actualNews = bd.look_for_user_votes("news", actualNews, actualUser)
+        if(actualNews.url == ""):
+            return "Que bom! Você já averiguou todas as notícias até o momento!"
+        else:
+            return "Temos uma notícia para você averiguar:\\n\\n" + actualNews.url + "\\n\\nAgora preciso que você digite:\\n\\n" + "'1' se considerar que é uma notícia verdadeira\\n'2' para uma notícia mentirosa ou\\n'3' se você não sabe se é uma noticia verdadeira."
         return "AOBAAAAAAA"
+    if(intentName == "resultado_da_analise"):
+        return "RESULTADO AQUI"
     return "não achei o link, malz ae"
+    #incerto
+    #falso
+    #verdade
     
     #if()
 
