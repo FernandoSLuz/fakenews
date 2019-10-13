@@ -134,7 +134,7 @@ def sendWassengerMessage(phoneNumber, message):
     url = "https://api.wassenger.com/v1/messages"
 
     payload = "{\"phone\":\""+phoneNumber+"\",\"priority\":\"urgent\",\"message\":\""+ message +"\"}"
-
+    print(payload)
     #print("old payload = " + payload)
     headers = {
         'content-type': "application/json",
