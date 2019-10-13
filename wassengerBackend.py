@@ -3,6 +3,7 @@ import os
 import time
 import json
 import dialogflowBackend as dialogScript
+import re
 
 import flask
 from flask import Blueprint
@@ -40,7 +41,7 @@ def dialogwebhook():
     actualUser.conversationId = str(form['session'])
 
     print("big = " + actualUser.conversationId )
-    actualUser.conversationId = (actualUser.conversationId).replace('projects/lighthouse-vms/agent/sessions/', '')
+    actualUser.conversationId = re.sub("projects/lighthouse-vms/agent/sessions/", "", actualUser.conversationid)
     print("small = " + actualUser.conversationid)
 
     actualUser = bd.find_user(actualUser, "users", "conversationid", actualUser.conversationid)
