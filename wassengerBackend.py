@@ -38,11 +38,11 @@ def dialogwebhook():
     form = request.get_json(silent=True, force=True)
     #res = (json.dumps(form, indent=3))
     actualUser = user()
-    actualUser.conversationId = str(form['session']).rsplit('/',1)[1]
-
+    actualUser.conversationId = re.sub(r"\W", "", str(form['session']).rsplit('/',1)[1])
+    
     #print("big = " + actualUser.conversationId )
 
-    actualUser = bd.find_user(actualUser, "users", "conversationid", "23ae4269520cb1f7a8b0bf7d3cac0dd1")
+    actualUser = bd.find_user(actualUser, "users", "conversationid", actualUser.conversationId)
     print("USER CONVERSATION ID = " + actualUser.conversationid)
     intentName = str(form['queryResult']['intent']['displayName'])
     if(intentName == "envio_do_link" or intentName == "link_direto"):
