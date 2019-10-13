@@ -49,7 +49,7 @@ def dialogwebhook():
             actualNews.userid = actualUser.id
             actualNews = bd.insert_news(actualNews, "news", "url", actualNews.url)
             content = {
-                'message': "Obrigado, o link foi recebido e está sendo analizado!"
+                'message': "Obrigado, o link foi recebido e será analizado!"
             }
             return content
         votes = bd.find_votes("votes", "urlid", actualNews.id)
@@ -60,7 +60,9 @@ def dialogwebhook():
             }
             return content
         true = "Pessoas que acreditam que a notícia é verdadeira: " + str(votes[0])
-        unknown = "Pessoas que acreditam que a notícia é parcialmente verdadeira: " + str(votes[1])
+        #unknown = "Pessoas que acreditam que a notícia é parcialmente verdadeira: " + str(votes[1])
+        unknown = "\2B1B"  
+
         fake = "Pessoas que acreditam que a notícia é falsa: " + str(votes[2])
 
         message = "Notícia: " + str(actualNews.url) + "\\n\\n" + true + "\\n\\n" + unknown + "\\n\\n" + fake
@@ -136,7 +138,7 @@ def sendWassengerMessage(phoneNumber, message):
     payload = "{\"phone\":\""+phoneNumber+"\",\"priority\":\"urgent\",\"message\":\""+ message +"\"}"
 
     newbytes = payload.encode('utf-8')
-    string = newbytes.decode('utf-8')
+    string = newbytes.decode('ASCII')
 
     print(payload)
     #print("old payload = " + payload)
