@@ -38,7 +38,7 @@ def dialogwebhook():
     form = request.get_json(silent=True, force=True)
     res = (json.dumps(form, indent=3))
     actualUser = user()
-    actualUser.conversationId = str(form['session']).conversationId.rsplit('/',1)[1]
+    actualUser.conversationId = str(form['session']).rsplit('/',1)[1]
 
     print("big = " + actualUser.conversationId )
 
