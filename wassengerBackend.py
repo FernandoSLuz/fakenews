@@ -6,7 +6,7 @@ import dialogflowBackend as dialogScript
 
 import flask
 from flask import Blueprint
-
+from flask import request
 
 blueprint = flask.Blueprint('wassengerBackend', __name__)
 
@@ -19,13 +19,22 @@ class user():
 
 actualUser = user()
 
+
+
+@blueprint.route('/dialogwebhook', methods=[ 'GET', 'POST' ])
+def dialogwebhook():
+    form = request.get_json(silent=True, force=True)
+    res = (json.dumps(form, indent=3))
+    if(res is 'null'):
+        return {'fulfillmentText': '404'}
+    else:
+        intentName = form['queryResult']['intent']['displayName']
+        return {'fulfillmentText': "Intent " + intentName + " not listed on our database"}
+
 def sendWassengerMessage(phoneNumber, message):
     import requests as req
     print("phone = " + phoneNumber + " ----- message = " + message)
     url = "https://api.wassenger.com/v1/messages"
-
-    #print("formated payload = " + str(newPayload).replace(r"'", "\""))
-
 
     payload = "{\"phone\":\""+phoneNumber+"\",\"priority\":\"urgent\",\"message\":\""+ message +"\"}"
 
