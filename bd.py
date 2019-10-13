@@ -69,6 +69,16 @@ def find_news(data, table, key, value):
         data.userid = x[2]
     return data
 
+def find_news_by_id(data, table, key, value):
+    sql = "SELECT * FROM " + table + " WHERE " + key + " = "+ str(value)
+    mycursor.execute(sql)
+    myresult = mycursor.fetchall()
+    for x in myresult:
+        data.id = x[0]
+        data.url = x[1]
+        data.userid = x[2]
+    return data
+
 def find_votes(table, key, value):
     sql = "SELECT * FROM " + table + " WHERE " + key + " ='"+ str(value) +"'"
     mycursor.execute(sql)
@@ -104,10 +114,8 @@ def look_for_user_votes(table, data, userdata):
 def insert_vote(dataNews, dataUser, votetype, table):
     sql = "INSERT INTO " + table + " (urlid, userid, votetype) VALUES (%s, %s, %s)"
     val = (dataNews.url, dataUser.id, votetype)
-    #print(data.url)
     mycursor.execute(sql, val)
     mydb.commit()
-    return data
 
 def update_user(table, keytoupdate, valuetoupdate, key, value):
     sql = "UPDATE " + table + " SET " + keytoupdate + " = " + str(valuetoupdate) + " WHERE " + key + " = " + str(value)
