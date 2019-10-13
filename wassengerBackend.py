@@ -50,7 +50,7 @@ def dialogwebhook():
         #actualNews.userid = actualUser.id
         actualNews.url = str(form['queryResult']['outputContexts'][0]['parameters']['url'])
         actualNews = bd.find_news(actualNews, "news", "url", actualNews.url)
-        print("id = " + actualNews.id)
+        print("id = " + str(actualNews.id))
         if(actualNews.userid == 0):
             actualNews.userid = actualUser.id
             actualNews = bd.insert_news(actualNews, "news", "url", actualNews.url)
