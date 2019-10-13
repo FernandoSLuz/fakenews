@@ -17,18 +17,31 @@ class user():
     name = ""
     conversationid = ""
 
+class news():
+    id = 0
+    url = ""
+    userid = 0
+
+class vote():
+    id = 0
+    urlid = 0
+    userid = 0
+    votetype = 0
+
 actualUser = user()
 
 
 
 @blueprint.route('/dialogwebhook', methods=[ 'POST' ])
 def dialogwebhook():
+    import bd
     form = request.get_json(silent=True, force=True)
     res = (json.dumps(form, indent=3))
-    #print(res)
+    print(res)
     intentName = str(form['queryResult']['intent']['displayName'])
     if(intentName == "envio_do_link" or intentName == "link_direto"):
         link = "Recebi o link e processei: " + str(form['queryResult']['outputContexts'][0]['parameters']['url'])
+        #bd.find_user()
         content = {
             'message': link
         }
@@ -61,7 +74,6 @@ def sendWassengerMessage(phoneNumber, message):
 def recievemessage():
     import bd
     from flask import request
-    global actualUser
     newUser = user()
     form = request.get_json(silent=True, force=True)
     res = (json.dumps(form, indent=3))
