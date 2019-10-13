@@ -17,6 +17,7 @@ class user():
     phone = ""
     name = ""
     conversationid = ""
+    newsid = 0
 
 class news():
     id = 0
@@ -39,9 +40,7 @@ def dialogwebhook():
     #res = (json.dumps(form, indent=3))
     actualUser = user()
     actualUser.conversationId = re.sub(r"\W", "", str(form['session']).rsplit('/',1)[1])
-    
     #print("big = " + actualUser.conversationId )
-
     actualUser = bd.find_user(actualUser, "users", "conversationid", actualUser.conversationId)
     print("USER CONVERSATION ID = " + actualUser.conversationid)
     intentName = str(form['queryResult']['intent']['displayName'])
@@ -69,6 +68,7 @@ def dialogwebhook():
         print("MESSAGE - " + message)
         return content
     if(intentName == "escolheu_analisar"):
+        
         return "AOBAAAAAAA"
     return "não achei o link, malz ae"
     

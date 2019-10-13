@@ -15,8 +15,8 @@ mycursor = mydb.cursor()
 
 def insert_user(data, table, key, value):
     result = hashlib.md5(str(datetime.now()).encode())
-    sql = "INSERT INTO " + table + " (phone, name, conversationid) VALUES (%s, %s, %s)"
-    val = (data.phone, "default - name", str(result.hexdigest()))
+    sql = "INSERT INTO " + table + " (phone, name, conversationid) VALUES (%s, %s, %s, %s)"
+    val = (data.phone, "default - name", str(result.hexdigest()), 0)
     mycursor.execute(sql, val)
     mydb.commit()
     data = find_user(data, table, key, value)
@@ -79,6 +79,21 @@ def find_votes(table, key, value):
         if(x[3] == 1): votes[1] = votes[1] + 1
         if(x[3] == 2): votes[2] = votes[2] + 1
     return votes
+
+def look_for_user_votes(data, table, key, value){
+    sql = "SELECT * FROM " + table
+    mycursor.execute(sql)
+    myresult = mycursor.fetchall()
+    for x in myresult:
+        
+}
+
+def update_user(table, keytoupdate, valuetoupdate, key, value):
+    sql = "UPDATE " + table + " SET " + keytoupdate + " = '" + valuetoupdate + "' WHERE " + key + " = '" + value + "'"
+    mycursor.execute(sql)
+    mydb.commit()
+
+    print(mycursor.rowcount, "record(s) affected")
 #def update_user(userPhone, new_Name):
     #upd = db.update(users).where(users.phone == userPhone).values(name=new_Name)
     #db.session.execute(upd)
