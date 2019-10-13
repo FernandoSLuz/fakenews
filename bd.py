@@ -70,7 +70,7 @@ def find_news(data, table, key, value):
     return data
 
 def find_votes(table, key, value):
-    sql = "SELECT * FROM " + table + " WHERE " + key + " ='"+ value +"'"
+    sql = "SELECT * FROM " + table + " WHERE " + key + " ='"+ str(value) +"'"
     mycursor.execute(sql)
     myresult = mycursor.fetchall()
     votes = [0,0,0]
