@@ -51,7 +51,7 @@ def select_all_users(table):
 
 
 def insert_news(data, table, key, value):
-    sql = "INSERT INTO " + table + " (phone, name, conversationid) VALUES (%s, %s, %s)"
+    sql = "INSERT INTO " + table + " (phone, name, conversationid) VALUES (%s, %s)"
     val = (data.url, data.userid)
     print(data.url)
     mycursor.execute(sql, val)
