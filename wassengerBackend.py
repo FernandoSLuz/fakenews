@@ -87,19 +87,33 @@ def dialogwebhook():
         }
         return content
     if(intentName == "resultado_da_analise"):
+        answer = str(form['queryResult']['outputContexts'][0]['parameters']['Opiniao_Veracidade'])
+        answerid = -1
+        introductionText = ""
+        if(answer == "verdade"):
+            introductionText = "Você selecionou a notícia como VERDADEIRA,"
+            answerid = 0
+        elif(answer == "falso"):
+            introductionText = "Você selecionou a notícia como FALSA,"
+            answerid = 2
+        else: 
+            introductionText = "Você selecionou a notícia como INCERTA,"
+            answerid = 1
+        
+        print(form)
         actualNews = news()
         actualUser = bd.find_user(actualUser, "users", "conversationid", actualUser.conversationId)
         print("newsId - " + str(actualUser.newsid))
         print("userId - " + str(actualUser.id))
         print("conversationId - " + str(actualUser.conversationid))
         actualNews = bd.find_news_by_id(actualNews, "news", "id", actualUser.newsid)
-        bd.insert_vote(actualNews, actualUser, 1, "votes")
+        bd.insert_vote(actualNews, actualUser, answerid, "votes")
         votes = bd.find_votes("votes", "urlid", actualNews.id)
         true = "Pessoas que acreditam que a notícia é verdadeira: " + str(votes[0])
         unknown = "Pessoas que acreditam que a notícia é parcialmente verdadeira: " + str(votes[1])
         fake = "Pessoas que acreditam que a notícia é falsa: " + str(votes[2])
 
-        message = "Obrigado pela sua contribuição!\\n\\nSeguem as estatísticas de quem analisou essa notícia:" + "\\n\\n" + true + "\\n\\n" + unknown + "\\n\\n" + fake
+        message = introductionText + " Obrigado pela sua contribuição!\\n\\nSeguem estatísticas gerais desta notícia:" + "\\n\\n" + true + "\\n\\n" + unknown + "\\n\\n" + fake
         content = {
             'message': message
         }
