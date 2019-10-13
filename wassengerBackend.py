@@ -41,7 +41,7 @@ def dialogwebhook():
     actualUser.conversationId = str(form['session'])
 
     print("big = " + actualUser.conversationId )
-    actualUser.conversationId = re.sub("projects/lighthouse-vms/agent/sessions/", "", actualUser.conversationid)
+    actualUser.conversationId = actualUser.conversationId.rsplit('/',1)[1]
     print("small = " + actualUser.conversationid)
 
     actualUser = bd.find_user(actualUser, "users", "conversationid", actualUser.conversationid)
