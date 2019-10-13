@@ -53,7 +53,10 @@ def dialogwebhook():
         if(actualNews.userid == 0):
             actualNews.userid = actualUser.id
             actualNews = bd.insert_news(actualNews, "news", "url", actualNews.url)
-            return "Obrigado, o link foi recebido e está sendo analizado!"
+            content = {
+                'message': "Obrigado, o link foi recebido e está sendo analizado!"
+            }
+            return content
         votes = bd.find_votes("votes", "urlid", actualNews.id)
         #CHANGE LATER
         #if(votes[0] == 0 and votes[1] == 0 and votes[2] == 0): return "Obrigado, o link foi recebido e está sendo analizado!"
@@ -72,14 +75,30 @@ def dialogwebhook():
         actualNews = news()
         actualNews = bd.look_for_user_votes("news", actualNews, actualUser)
         print("ANALISAR")
+
         if(actualNews.url == ""):
-            return "Que bom! Você já averiguou todas as notícias até o momento!"
+            content = {
+                'message': "Que bom! Você já averiguou todas as notícias até o momento!"
+            }
+            return content
         else:
-            return "Temos uma notícia para você averiguar:\\n\\n" + actualNews.url + "\\n\\nAgora preciso que você digite:\\n\\n" + "'1' se considerar que é uma notícia verdadeira\\n'2' para uma notícia mentirosa ou\\n'3' se você não sabe se é uma noticia verdadeira."
-        return "AOBAAAAAAA"
+            content = {
+                'message': "Temos uma notícia para você averiguar:\\n\\n" + actualNews.url + "\\n\\nAgora preciso que você digite:\\n\\n" + "'1' se considerar que é uma notícia verdadeira\\n'2' para uma notícia mentirosa ou\\n'3' se você não sabe se é uma noticia verdadeira."
+            }
+            return content
+        content = {
+            'message': "ERRO DE ANALISE"
+        }
+        return content
     if(intentName == "resultado_da_analise"):
-        return "RESULTADO AQUI"
-    return "não achei o link, malz ae"
+        content = {
+            'message': "RESULTADO AQUI"
+        }
+        return content
+    content = {
+        'message': "ERRO DE INDENT, NENHUMA CONVERSA ENCONTRADA"
+    }
+    return content
     #incerto
     #falso
     #verdade
