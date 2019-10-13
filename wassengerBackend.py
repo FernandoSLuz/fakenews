@@ -25,11 +25,10 @@ actualUser = user()
 def dialogwebhook():
     form = request.get_json(silent=True, force=True)
     res = (json.dumps(form, indent=3))
-    print(res)
-
+    #print(res)
     intentName = str(form['queryResult']['intent']['displayName'])
     if(intentName == "envio_do_link" or intentName == "link_direto"):
-        link = str(form['queryResult']['outputContexts'][0]['parameters']['url'])
+        link = "Recebi o link e processei: " + str(form['queryResult']['outputContexts'][0]['parameters']['url'])
         content = {
             'message': link
         }
