@@ -21,16 +21,13 @@ actualUser = user()
 
 
 
-@blueprint.route('/webhook', methods=[ 'POST' ])
-def webhook():
-    print("test")
+@blueprint.route('/dialogwebhook', methods=[ 'POST' ])
+def dialogwebhook():
     form = request.get_json(silent=True, force=True)
     res = (json.dumps(form, indent=3))
-    if(res is 'null'):
-        return {'fulfillmentText': '404'}
-    else:
-        intentName = form['queryResult']['intent']['displayName']
-        return {'fulfillmentText': "Intent " + intentName + " not listed on our database"}
+    print(res)
+    return "Teste feedback"
+    #if()
 
 def sendWassengerMessage(phoneNumber, message):
     import requests as req
