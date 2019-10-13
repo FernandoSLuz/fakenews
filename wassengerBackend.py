@@ -48,7 +48,7 @@ def dialogwebhook():
     if(intentName == "envio_do_link" or intentName == "link_direto"):
         actualNews = news()
         #actualNews.userid = actualUser.id
-        actualNews.url = re.sub(r"\W", "", str(form['queryResult']['outputContexts'][0]['parameters']['url'])) 
+        actualNews.url = str(form['queryResult']['outputContexts'][0]['parameters']['url'])
         actualNews = bd.find_news(actualNews, "news", "url", actualNews.url)
         print("id = " + actualNews.id)
         if(actualNews.userid == 0):
