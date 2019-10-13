@@ -194,7 +194,7 @@ def recievemessage():
 def MontarTextoTermometro(numTru, numFake):
 	text = "Verdade ";
 
-	blackCode = "O" #"\2B1B";
+	blackCode = "\U0001f600" #"\2B1B";
 	whiteCode = "X" #"\2B1C";
 	
 	numTermo = numTru / (numTru + numFake) * 10;
