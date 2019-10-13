@@ -91,8 +91,17 @@ def dialogwebhook():
         }
         return content
     if(intentName == "resultado_da_analise"):
+        actualNews = news()
+        actualNews = bd.find_news(actualNews, "news", "id", actualUser.newsid)
+        bd.insert_vote(actualNews, actualUser, 1, "votes")
+        votes = bd.find_votes("votes", "urlid", actualNews.id)
+        true = "Pessoas que acreditam que a notícia é verdadeira: " + str(votes[0])
+        unknown = "Pessoas que acreditam que a notícia é parcialmente verdadeira: " + str(votes[1])
+        fake = "Pessoas que acreditam que a notícia é falsa: " + str(votes[2])
+
+        message = "Obrigado pela sua contribuição!\\n\\nSeguem as estatísticas de quem analisou essa notícia:" + "\\n\\n" + true + "\\n\\n" + unknown + "\\n\\n" + fake
         content = {
-            'message': "RESULTADO AQUI"
+            'message': message
         }
         return content
     content = {

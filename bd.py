@@ -101,7 +101,13 @@ def look_for_user_votes(table, data, userdata):
             break
     return data
 
-
+def insert_vote(dataNews, dataUser, votetype, table):
+    sql = "INSERT INTO " + table + " (urlid, userid, votetype) VALUES (%s, %s, %s)"
+    val = (dataNews.url, dataUser.id, votetype)
+    #print(data.url)
+    mycursor.execute(sql, val)
+    mydb.commit()
+    return data
 
 def update_user(table, keytoupdate, valuetoupdate, key, value):
     sql = "UPDATE " + table + " SET " + keytoupdate + " = " + str(valuetoupdate) + " WHERE " + key + " = " + str(value)
