@@ -65,7 +65,9 @@ def dialogwebhook():
 
         fake = "Pessoas que acreditam que a notícia é falsa: " + str(votes[2])
 
-        message = "Notícia: " + str(actualNews.url) + "\\n\\n" + true + "\\n\\n" + unknown + "\\n\\n" + fake
+        termometro = MontarTextoTermometro((str(votes[0]+1),(str(votes[2]+1)  )
+
+        message = "Notícia: " + str(actualNews.url) + "\\n\\n" + true + "\\n\\n" + unknown + "\\n\\n" + fake + "\\n\\n" + termometro
         content = {
             'message': message
         }
@@ -184,3 +186,24 @@ def recievemessage():
         return "200"
     else:
         return("---------------> message is not from user. Type = " + str(form['data']['chat']['contact']['type']))
+
+
+
+
+def MontarTextoTermometro(numTru, numFake):
+	text = "Verdade ";
+
+	blackCode = "O" #"\2B1B";
+	whiteCode = "X" #"\2B1C";
+	
+	numTermo = numTru / (numTru + numFake) * 10;
+
+	for i in range(10):
+	
+		if i<numTermo:
+			text += blackCode
+		else:
+			text += whiteCode
+
+	text += " Fake"
+	return text
