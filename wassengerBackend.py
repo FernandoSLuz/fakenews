@@ -36,13 +36,14 @@ class vote():
 def dialogwebhook():
     import bd
     form = request.get_json(silent=True, force=True)
-    res = (json.dumps(form, indent=3))
+    #res = (json.dumps(form, indent=3))
     actualUser = user()
     actualUser.conversationId = str(form['session']).rsplit('/',1)[1]
 
-    print("big = " + actualUser.conversationId )
+    #print("big = " + actualUser.conversationId )
 
     actualUser = bd.find_user(actualUser, "users", "conversationid", actualUser.conversationid)
+    print("USER CONVERSATION ID = " + actualUser.conversationid)
     intentName = str(form['queryResult']['intent']['displayName'])
     if(intentName == "envio_do_link" or intentName == "link_direto"):
         actualNews = news()
