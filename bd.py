@@ -116,7 +116,7 @@ def look_for_user_votes(table, data, userdata):
 
 def insert_vote(dataNews, dataUser, votetype, table):
     sql = "INSERT INTO " + table + " (urlid, userid, votetype) VALUES (%s, %s, %s)"
-    val = (dataNews.url, dataUser.id, votetype)
+    val = (dataNews.id, dataUser.id, votetype)
     mycursor.execute(sql, val)
     mydb.commit()
 
