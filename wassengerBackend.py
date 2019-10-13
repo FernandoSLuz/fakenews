@@ -41,8 +41,7 @@ def dialogwebhook():
     actualUser.conversationId = str(form['session'])
 
     print("big = " + actualUser.conversationId )
-    actualUser.conversationId = actualUser.conversationId.rsplit('/',1)[1]
-    print("small = " + actualUser.conversationid)
+    print("small = " + actualUser.conversationId.rsplit('/',1)[1])
 
     actualUser = bd.find_user(actualUser, "users", "conversationid", actualUser.conversationid)
     intentName = str(form['queryResult']['intent']['displayName'])
