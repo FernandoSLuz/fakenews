@@ -88,7 +88,10 @@ def dialogwebhook():
         return content
     if(intentName == "resultado_da_analise"):
         actualNews = news()
-        print("before - " + str(actualUser.newsid))
+        actualUser = bd.find_user(actualUser, "users", "conversationid", actualUser.conversationId)
+        print("newsId - " + str(actualUser.newsid))
+        print("userId - " + str(actualUser.id))
+        print("conversationId - " + str(actualUser.conversationid))
         actualNews = bd.find_news_by_id(actualNews, "news", "id", actualUser.newsid)
         bd.insert_vote(actualNews, actualUser, 1, "votes")
         votes = bd.find_votes("votes", "urlid", actualNews.id)
