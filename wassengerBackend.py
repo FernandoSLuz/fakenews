@@ -26,7 +26,10 @@ def dialogwebhook():
     form = request.get_json(silent=True, force=True)
     res = (json.dumps(form, indent=3))
     print(res)
-    return "Teste feedback"
+    content = {
+        'message': 'Webhook do app!'
+    }
+    return content
     #if()
 
 def sendWassengerMessage(phoneNumber, message):
