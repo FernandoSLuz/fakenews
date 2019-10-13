@@ -39,8 +39,7 @@ def dialogwebhook():
     actualUser = user()
     actualUser.conversationId = str(form['session']).replace("projects/lighthouse-vms/agent/sessions/","")
     actualUser = bd.find_user(actualUser, "users", "conversationid", actualUser.conversationid)
-
-    print(res)
+    print(actualUser.conversationid)
     intentName = str(form['queryResult']['intent']['displayName'])
     if(intentName == "envio_do_link" or intentName == "link_direto"):
         actualNews = news()
@@ -50,7 +49,7 @@ def dialogwebhook():
         if(actualNews.userid == 0):
             actualNews.userid = actualUser.id
             actualNews = bd.insert_news(actualNews, "news", "url", actualNews.url)
-        message = "noticia localizada. ID = " + actualNews.id + " ---- URL = " + actualNews.url
+        message = "noticia localizada. ID = " + str(actualNews.id) + " ---- URL = " + actualNews.url
         content = {
             'message': message
         }
