@@ -69,6 +69,16 @@ def find_news(data, table, key, value):
         data.userid = x[2]
     return data
 
+def find_votes(table, key, value):
+    sql = "SELECT * FROM " + table + " WHERE " + key + " ='"+ value +"'"
+    mycursor.execute(sql)
+    myresult = mycursor.fetchall()
+    votes = [0,0,0]
+    for x in myresult:
+        if(x[3] == 0): votes[0] = votes[0] + 1
+        if(x[3] == 1): votes[1] = votes[1] + 1
+        if(x[3] == 2): votes[2] = votes[2] + 1
+    return votes
 #def update_user(userPhone, new_Name):
     #upd = db.update(users).where(users.phone == userPhone).values(name=new_Name)
     #db.session.execute(upd)
