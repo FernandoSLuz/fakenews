@@ -37,19 +37,14 @@ class vote():
 def dialogwebhook():
     import bd
     form = request.get_json(silent=True, force=True)
-    #res = (json.dumps(form, indent=3))
     actualUser = user()
     actualUser.conversationId = re.sub(r"\W", "", str(form['session']).rsplit('/',1)[1])
-    #print("big = " + actualUser.conversationId )
     actualUser = bd.find_user(actualUser, "users", "conversationid", actualUser.conversationId)
-    print("USER CONVERSATION ID = " + actualUser.conversationid)
     intentName = str(form['queryResult']['intent']['displayName'])
     if(intentName == "envio_do_link" or intentName == "link_direto"):
         actualNews = news()
-        #actualNews.userid = actualUser.id
         actualNews.url = str(form['queryResult']['outputContexts'][0]['parameters']['url'])
         actualNews = bd.find_news(actualNews, "news", "url", actualNews.url)
-        print("id = " + str(actualNews.id))
         if(actualNews.userid == 0):
             actualNews.userid = actualUser.id
             actualNews = bd.insert_news(actualNews, "news", "url", actualNews.url)
@@ -59,7 +54,11 @@ def dialogwebhook():
             return content
         votes = bd.find_votes("votes", "urlid", actualNews.id)
         #CHANGE LATER
-        #if(votes[0] == 0 and votes[1] == 0 and votes[2] == 0): return "Obrigado, o link foi recebido e está sendo analizado!"
+        if(votes[0] == 0 and votes[1] == 0 and votes[2] == 0): 
+            content = {
+                'message': "Obrigado, o link foi recebido e está sendo analizado!"
+            }
+            return content
         true = "Pessoas que acreditam que a notícia é verdadeira: " + str(votes[0])
         unknown = "Pessoas que acreditam que a notícia é parcialmente verdadeira: " + str(votes[1])
         fake = "Pessoas que acreditam que a notícia é falsa: " + str(votes[2])
@@ -68,13 +67,10 @@ def dialogwebhook():
         content = {
             'message': message
         }
-        print("MESSAGE - " + message)
         return content
     if(intentName == "escolheu_analisar"):
-        print("ANALISAR 1")
         actualNews = news()
         actualNews = bd.look_for_user_votes("news", actualNews, actualUser)
-        print("ANALISAR")
 
         if(actualNews.url == ""):
             content = {
@@ -92,7 +88,9 @@ def dialogwebhook():
         return content
     if(intentName == "resultado_da_analise"):
         actualNews = news()
+        print("before - " + actualNews.url)
         actualNews = bd.find_news_by_id(actualNews, "news", "id", actualUser.newsid)
+        print("after - " + actualNews.url)
         bd.insert_vote(actualNews, actualUser, 1, "votes")
         votes = bd.find_votes("votes", "urlid", actualNews.id)
         true = "Pessoas que acreditam que a notícia é verdadeira: " + str(votes[0])
