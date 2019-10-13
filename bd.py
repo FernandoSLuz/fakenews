@@ -70,10 +70,12 @@ def find_news(data, table, key, value):
     return data
 
 def find_news_by_id(data, table, key, value):
+    #(actualNews, "news", "id", actualUser.newsid)
     sql = "SELECT * FROM " + table + " WHERE " + key + " = "+ str(value)
     mycursor.execute(sql)
     myresult = mycursor.fetchall()
     for x in myresult:
+        print("passow")
         data.id = x[0]
         data.url = x[1]
         data.userid = x[2]
