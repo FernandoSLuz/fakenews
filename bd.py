@@ -50,6 +50,23 @@ def select_all_users(table):
     return(usersData)
 
 
+def insert_news(data, table, key, value):
+    sql = "INSERT INTO " + table + " (phone, name, conversationid) VALUES (%s, %s, %s)"
+    val = (data.url, data.userid)
+    mycursor.execute(sql, val)
+    mydb.commit()
+    data = find_news(data, table, key, value)
+    return data
+
+def find_news(data, table, key, value):
+    sql = "SELECT * FROM " + table + " WHERE " + key + " ='"+ value +"'"
+    mycursor.execute(sql)
+    myresult = mycursor.fetchall()
+    for x in myresult:
+        data.id = x[0]
+        data.url = x[1]
+        data.userid = x[2]
+    return data
 
 #def update_user(userPhone, new_Name):
     #upd = db.update(users).where(users.phone == userPhone).values(name=new_Name)

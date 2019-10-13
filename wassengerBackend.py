@@ -28,7 +28,6 @@ class vote():
     userid = 0
     votetype = 0
 
-actualUser = user()
 
 
 
@@ -37,13 +36,23 @@ def dialogwebhook():
     import bd
     form = request.get_json(silent=True, force=True)
     res = (json.dumps(form, indent=3))
+    actualUser = user()
+    actualUser.conversationId = str(form['session']).replace("projects/lighthouse-vms/agent/sessions/","")
+    actualUser = bd.find_user(actualUser, "users", "conversationid", actualUser.conversationid)
+
     print(res)
     intentName = str(form['queryResult']['intent']['displayName'])
     if(intentName == "envio_do_link" or intentName == "link_direto"):
-        link = "Recebi o link e processei: " + str(form['queryResult']['outputContexts'][0]['parameters']['url'])
-        #bd.find_user()
+        actualNews = news()
+        #actualNews.userid = actualUser.id
+        actualNews.url = str(form['queryResult']['outputContexts'][0]['parameters']['url'])
+        actualNews = bd.find_news(actualNews, news, "url", actualNews.url)
+        if(actualNews.userid == 0):
+            actualNews.userid = actualUser.id
+            actualNews = bd.insert_news(actualNews, news, "url", actualNews.url)
+        message = "noticia localizada. ID = " + actualNews.id + " ---- URL = " + actualNews.url
         content = {
-            'message': link
+            'message': message
         }
         return content
     return "não achei o link, malz ae"
