@@ -39,7 +39,8 @@ def dialogwebhook():
     actualUser = user()
     actualUser.conversationId = str(form['session']).replace("projects/lighthouse-vms/agent/sessions/","")
     actualUser = bd.find_user(actualUser, "users", "conversationid", actualUser.conversationid)
-    print(actualUser.conversationid)
+    print("big" + str(form['session']))
+    print("small = " + actualUser.conversationid)
     intentName = str(form['queryResult']['intent']['displayName'])
     if(intentName == "envio_do_link" or intentName == "link_direto"):
         actualNews = news()
@@ -60,7 +61,7 @@ def dialogwebhook():
 
 def sendWassengerMessage(phoneNumber, message):
     import requests as req
-    print("phone = " + phoneNumber + " ----- message = " + message)
+    #print("phone = " + phoneNumber + " ----- message = " + message)
     url = "https://api.wassenger.com/v1/messages"
 
     payload = "{\"phone\":\""+phoneNumber+"\",\"priority\":\"urgent\",\"message\":\""+ message +"\"}"
@@ -73,7 +74,7 @@ def sendWassengerMessage(phoneNumber, message):
 
     res = req.request("POST", url, data=payload, headers=headers)
     res.json() if res.status_code == 200 else []
-    print(res.content)
+    #print(res.content)
     return res.status_code
     #print(res.json())
 
