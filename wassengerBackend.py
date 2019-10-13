@@ -68,7 +68,7 @@ def dialogwebhook():
         print("MESSAGE - " + message)
         return content
     if(intentName == "escolheu_analisar"):
-        #actualUser
+        print("ANALISAR")
         actualNews = news()
         actualNews = bd.look_for_user_votes("news", actualNews, actualUser)
         if(actualNews.url == ""):
