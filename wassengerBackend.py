@@ -21,8 +21,8 @@ actualUser = user()
 
 
 
-@blueprint.route('/dialogwebhook', methods=[ 'POST' ])
-def dialogwebhook():
+@blueprint.route('/webhook', methods=[ 'POST' ])
+def webhook():
     print("test")
     form = request.get_json(silent=True, force=True)
     res = (json.dumps(form, indent=3))
