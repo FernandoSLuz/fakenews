@@ -42,7 +42,7 @@ def dialogwebhook():
 
     #print("big = " + actualUser.conversationId )
 
-    actualUser = bd.find_user(actualUser, "users", "conversationid", actualUser.conversationid)
+    actualUser = bd.find_user(actualUser, "users", "conversationid", "23ae4269520cb1f7a8b0bf7d3cac0dd1")
     print("USER CONVERSATION ID = " + actualUser.conversationid)
     intentName = str(form['queryResult']['intent']['displayName'])
     if(intentName == "envio_do_link" or intentName == "link_direto"):
