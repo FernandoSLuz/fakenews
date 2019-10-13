@@ -59,15 +59,22 @@ def dialogwebhook():
                 'message': "Obrigado, o link foi recebido e está sendo analisado!"
             }
             return content
-        true = "Pessoas que acreditam que a notícia é verdadeira: " + str(votes[0])
+        true = str(votes[0]) + " Pessoas acreditam que a notícia é VERDADE"
         unknown = "Pessoas que acreditam que a notícia é parcialmente verdadeira: " + str(votes[1])
         #unknown = "\\2B1B"  
 
-        fake = "Pessoas que acreditam que a notícia é falsa: " + str(votes[2])
+        fake = str(votes[2]) + " Pessoas acreditam que a notícia é FAKE"
 
         termometro = MontarTextoTermometro((votes[0]+1),(votes[2]+1))
 
-        message = "Notícia: " + str(actualNews.url) + "\\n\\n" + true + "\\n\\n" + unknown + "\\n\\n" + fake  + "\\n\\n" + termometro
+        textReturn = ""
+
+        if votes[0]>votes[2] :
+            textReturn = true
+        else:
+            textReturn = false
+
+        message = "Notícia: " + str(actualNews.url) + "\\n\\n" + textReturn + "\\n\\n" +  termometro
 
         content = {
             'message': message
@@ -195,7 +202,7 @@ def MontarTextoTermometro(numTru, numFake):
 	text = "Verdade "
 
 	blackCode = "\U00002B1B" #"\2B1B";
-	whiteCode = "\U0002b1c0" #"\2B1C";
+	whiteCode = "\U00002b1c" #"\2B1C";
 	
 	numTermo = numTru / (numTru + numFake) * 10
 
