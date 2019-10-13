@@ -31,6 +31,7 @@ def find_user(data, table, key, value):
         data.name = x[2]
         data.phone = x[1]
         data.conversationid = x[3]
+        print("ID = " x[3])
     return data
 
 def select_all_users(table):
