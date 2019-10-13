@@ -60,14 +60,15 @@ def dialogwebhook():
             }
             return content
         true = "Pessoas que acreditam que a notícia é verdadeira: " + str(votes[0])
-        unknown = ""#"Pessoas que acreditam que a notícia é parcialmente verdadeira: " + str(votes[1])
+        unknown = "Pessoas que acreditam que a notícia é parcialmente verdadeira: " + str(votes[1])
         #unknown = "\\2B1B"  
 
         fake = "Pessoas que acreditam que a notícia é falsa: " + str(votes[2])
 
-        termometro = MontarTextoTermometro((str(votes[0]+1),(str(votes[2]+1)  )
+        termometro = MontarTextoTermometro((votes[0]+1),(votes[2]+1))
 
-        message = "Notícia: " + str(actualNews.url) + "\\n\\n" + true + "\\n\\n" + unknown + "\\n\\n" + fake + "\\n\\n" + termometro
+        message = "Notícia: " + str(actualNews.url) + "\\n\\n" + true + "\\n\\n" + unknown + "\\n\\n" + fake  + "\\n\\n" + termometro
+
         content = {
             'message': message
         }
