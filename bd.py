@@ -111,7 +111,11 @@ def look_for_user_votes(table, data, userdata):
             data.url = x[1]
             data.userid = x[2]
             update_user("users", "newsid", data.id, "id", userdata.id)
-            break
+        else:
+            data.id = x[0]
+            data.url = x[1]
+            data.userid = x[2]
+            update_user("users", "newsid", data.id, "id", userdata.id)
     return data
 
 def insert_vote(dataNews, dataUser, votetype, table):
