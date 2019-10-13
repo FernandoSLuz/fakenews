@@ -72,7 +72,7 @@ def dialogwebhook():
         if votes[0]>votes[2] :
             textReturn = true
         else:
-            textReturn = false
+            textReturn = fake
 
         message = "Notícia: " + str(actualNews.url) + "\\n\\n" + textReturn + "\\n\\n" +  termometro
 
