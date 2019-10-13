@@ -61,7 +61,7 @@ def dialogwebhook():
             return content
         true = "Pessoas que acreditam que a notícia é verdadeira: " + str(votes[0])
         #unknown = "Pessoas que acreditam que a notícia é parcialmente verdadeira: " + str(votes[1])
-        unknown = "\2B1B"  
+        unknown = "\\2B1B"  
 
         fake = "Pessoas que acreditam que a notícia é falsa: " + str(votes[2])
 
