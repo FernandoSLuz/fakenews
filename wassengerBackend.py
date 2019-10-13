@@ -192,12 +192,12 @@ def recievemessage():
 
 
 def MontarTextoTermometro(numTru, numFake):
-	text = "Verdade ";
+	text = "Verdade "
 
-	blackCode = "\U0001f600" #"\2B1B";
-	whiteCode = "X" #"\2B1C";
+	blackCode = "\U00002B1B" #"\2B1B";
+	whiteCode = "\U0002b1c0" #"\2B1C";
 	
-	numTermo = numTru / (numTru + numFake) * 10;
+	numTermo = numTru / (numTru + numFake) * 10
 
 	for i in range(10):
 	
