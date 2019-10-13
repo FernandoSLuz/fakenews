@@ -68,6 +68,8 @@ def dialogwebhook():
         }
         print("MESSAGE - " + message)
         return content
+    if(intentName == "escolheu_analisar"):
+        return "AOBAAAAAAA"
     return "não achei o link, malz ae"
     
     #if()
