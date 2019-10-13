@@ -135,8 +135,7 @@ def sendWassengerMessage(phoneNumber, message):
 
     payload = "{\"phone\":\""+phoneNumber+"\",\"priority\":\"urgent\",\"message\":\""+ message +"\"}"
 
-    sometext = payload.decode('utf-8')
-    newText = sometext.encode('utf-8')
+    newText = payload.encode('utf-8')
 
     print(payload)
     #print("old payload = " + payload)
