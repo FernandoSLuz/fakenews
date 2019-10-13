@@ -199,19 +199,19 @@ def recievemessage():
 
 
 def MontarTextoTermometro(numTru, numFake):
-	text = "Verdade "
+	text = "Verdade"
 
 	blackCode = "\U00002B1B" #"\2B1B";
 	whiteCode = "\U00002b1c" #"\2B1C";
 	
-	numTermo = numTru / (numTru + numFake) * 10
+	numTermo = numTru / (numTru + numFake) * 5
 
-	for i in range(10):
+	for i in range(5):
 	
 		if i<numTermo:
 			text += blackCode
 		else:
 			text += whiteCode
 
-	text += " Fake"
+	text += "Fake"
 	return text
