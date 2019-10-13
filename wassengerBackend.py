@@ -49,18 +49,18 @@ def dialogwebhook():
             actualNews.userid = actualUser.id
             actualNews = bd.insert_news(actualNews, "news", "url", actualNews.url)
             content = {
-                'message': "Obrigado, o link foi recebido e será analizado!"
+                'message': "Obrigado, o link foi recebido e será analisado!"
             }
             return content
         votes = bd.find_votes("votes", "urlid", actualNews.id)
         #CHANGE LATER
         if(votes[0] == 0 and votes[1] == 0 and votes[2] == 0): 
             content = {
-                'message': "Obrigado, o link foi recebido e está sendo analizado!"
+                'message': "Obrigado, o link foi recebido e está sendo analisado!"
             }
             return content
         true = "Pessoas que acreditam que a notícia é verdadeira: " + str(votes[0])
-        unknown = "Pessoas que acreditam que a notícia é parcialmente verdadeira: " + str(votes[1])
+        unknown = ""#"Pessoas que acreditam que a notícia é parcialmente verdadeira: " + str(votes[1])
         #unknown = "\\2B1B"  
 
         fake = "Pessoas que acreditam que a notícia é falsa: " + str(votes[2])
