@@ -49,7 +49,7 @@ def dialogwebhook():
         actualNews = bd.find_news(actualNews, "news", "url", actualNews.url)
         if(actualNews.userid == 0):
             actualNews.userid = actualUser.id
-            actualNews = bd.insert_news(actualNews, news, "url", actualNews.url)
+            actualNews = bd.insert_news(actualNews, "news", "url", actualNews.url)
         message = "noticia localizada. ID = " + actualNews.id + " ---- URL = " + actualNews.url
         content = {
             'message': message
