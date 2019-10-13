@@ -26,10 +26,16 @@ def dialogwebhook():
     form = request.get_json(silent=True, force=True)
     res = (json.dumps(form, indent=3))
     print(res)
-    content = {
-        'message': 'Webhook do app!'
-    }
-    return content
+
+    intentName = str(form['queryResult']['intent']['displayName'])
+    if(intentName == "envio_do_link" or intentName == "link_direto"):
+        link = str(form['queryResult']['outputContexts'][0]['parameters']['url'])
+        content = {
+            'message': link
+        }
+        return content
+    return "não achei o link, malz ae"
+    
     #if()
 
 def sendWassengerMessage(phoneNumber, message):
