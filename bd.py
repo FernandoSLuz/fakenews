@@ -104,7 +104,7 @@ def look_for_user_votes(table, data, userdata):
 
 
 def update_user(table, keytoupdate, valuetoupdate, key, value):
-    sql = "UPDATE " + table + " SET " + keytoupdate + " = " + str(valuetoupdate) + " WHERE " + key + " = " + str(value) + "
+    sql = "UPDATE " + table + " SET " + keytoupdate + " = " + str(valuetoupdate) + " WHERE " + key + " = " + str(value)
     mycursor.execute(sql)
     mydb.commit()
 
