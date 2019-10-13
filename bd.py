@@ -53,7 +53,7 @@ def select_all_users(table):
 def insert_news(data, table, key, value):
     sql = "INSERT INTO " + table + " (url, userid) VALUES (%s, %s)"
     val = (data.url, data.userid)
-    print(data.url)
+    #print(data.url)
     mycursor.execute(sql, val)
     mydb.commit()
     data = find_news(data, table, key, value)
